@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>logohere.png</file>
+    <file>import1.png</file>
+    <file>logo1.png</file>
+    <file>person-icon.png</file>
+    <file>train1.png</file>
+    <file>train21.png</file>
+    <file>validate1.png</file>
+    <file>validate21.png</file>
+    <file>visualize1.png</file>
+    <file>visualize21.png</file>
+  </qresource>
+</RCC>
