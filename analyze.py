@@ -161,10 +161,9 @@ def train_ui(series, button_, cons, eps, p, gam):
 	lm = LinearRegression(normalize=True)
 	lm.fit(X_train,y_train)
 
-	model.fit(X_train, Y_train)
 	# save the model to disk
 	filename = 'finalized_model.sav'
-	pickle.dump(model, open(filename, 'wb'))
+	pickle.dump(lm, open(filename, 'wb'))
 
 
 	for index, row_ in series.iterrows():
