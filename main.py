@@ -617,10 +617,10 @@ class Ui_MainWindow(object):
         print(self.pEdit.text())
         print(self.gamEdit.text())
 
-        cons = int(self.consEdit.text())
-        eps = int(self.epsEdit.text())
-        p = int(self.pEdit.text())
-        gam = int(self.gamEdit.text())
+        cons = float(self.consEdit.text())
+        eps = float(self.epsEdit.text())
+        p = float(self.pEdit.text())
+        gam = float(self.gamEdit.text())
 
         button_ = ""
 
@@ -683,10 +683,10 @@ class Ui_MainWindow(object):
 
     def predict(self):
         file = "D:/Aug/waterlevel_forecastingsystem/Trained/merged_imputation_f.csv"
-        cons = int(self.consEdit.text())
-        eps = int(self.epsEdit.text())
-        p = int(self.pEdit.text())
-        gam = int(self.gamEdit.text())
+        cons = float(self.consEdit.text())
+        eps = float(self.epsEdit.text())
+        p = float(self.pEdit.text())
+        gam = float(self.gamEdit.text())
 
         button_ = ""
 
@@ -715,10 +715,10 @@ class Ui_MainWindow(object):
     def predict_predict(self):
         file = "D:/Aug/waterlevel_forecastingsystem/Trained/merged_imputation_f.csv"
 
-        cons = int(self.consEdit.text())
-        eps = int(self.epsEdit.text())
-        p = int(self.pEdit.text())
-        gam = int(self.gamEdit.text())
+        cons = float(self.consEdit.text())
+        eps = float(self.epsEdit.text())
+        p = float(self.pEdit.text())
+        gam = float(self.gamEdit.text())
 
         button_ = ""
 
