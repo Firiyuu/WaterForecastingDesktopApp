@@ -15,6 +15,7 @@ import os
 import shutil
 import pandas as pd
 from dateandtime import get_date_time_after
+import matplotlib.pyplot as plt
 
 
 class Ui_MainWindow(object):
@@ -347,6 +348,7 @@ class Ui_MainWindow(object):
         self.visualizeBtn.setStyleSheet("background-color: rgb(85, 170, 255);\n"
 "color: rgb(255, 255, 255);")
         self.visualizeBtn.setObjectName("visualizeBtn")
+        self.visualizeBtn.clicked.connect(self.visualize)
 
         self.rmseLine = QtWidgets.QLineEdit(self.validateTab)
         self.rmseLine.setGeometry(QtCore.QRect(500, 500, 181, 31))
@@ -680,6 +682,10 @@ class Ui_MainWindow(object):
             for j in range(0, df.shape[0]):
                  self.valDataTable.setItem(j,i, QtWidgets.QTableWidgetItem(str(df.iloc[j][i])))
 
+    # Python program to get average of a list 
+    def average(self, lst): 
+        return sum(lst) / len(lst)
+
 
     def predict(self):
         file = "D:/Aug/waterlevel_forecastingsystem/Trained/merged_imputation_f.csv"
@@ -701,8 +707,12 @@ class Ui_MainWindow(object):
 
         df = pd.read_csv(file)
         val = validate(df, button_, cons, eps, p, gam)
-        print(val)
- 
+        print(val.head())
+        val.to_csv("visualize.csv")
+
+
+        rmse = val['RMSE']
+        mape = val['MAPE']
 
         self.valResulTable.setRowCount(val.shape[0])
         self.valResulTable.setColumnCount(val.shape[1])
@@ -710,6 +720,29 @@ class Ui_MainWindow(object):
         for i in range(0,val.shape[1]):
             for j in range(0, val.shape[0]):
                  self.valResulTable.setItem(j,i, QtWidgets.QTableWidgetItem(str(val.iloc[j][i])))
+
+
+        self.rmseLine.setText("Average RMSE =" + str(self.average(rmse)))
+        self.mapeLine.setText("Average MAPE =" + str(self.average(mape)))
+
+
+    def visualize(self):
+        file = "D:/Aug/waterlevel_forecastingsystem/visualize.csv"
+        df = pd.read_csv(file)
+        rmse = df['RMSE'].tolist()
+        mape = df['MAPE'].tolist()
+        actual = df['WATERLVEL'].tolist()
+        predicted = df['Predicted'].tolist()
+
+
+        plt.plot(rmse, rmse)
+        plt.plot(rmse, mape)
+        plt.plot(rmse, actual)
+        plt.plot(rmse, predicted)
+        plt.legend(['RMSE', 'MAPE', 'Actual', 'Predicted'], loc='upper left')
+        plt.xlabel('Waterlevel Graph')
+        plt.show()
+
 
 
     def predict_predict(self):
