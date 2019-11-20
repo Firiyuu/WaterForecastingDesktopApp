@@ -312,10 +312,10 @@ def predict(series, button_, cons, eps, p, gam, archi):
 		y = series[['WATERLVEL']]		
 
 
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=101)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
 
 
-
+	X_train, X_val, y_train, y_val  = train_test_split(X_train, y_train, test_size=0.25, random_state=1)
 
 	#GRID SEARCH CROSS VALIDATION
 	#GRID SEARCH CROSS VALIDATION
@@ -344,22 +344,27 @@ def predict(series, button_, cons, eps, p, gam, archi):
 
 	predictions = clf.predict(X_test)
 	#print(predictions)
-	rms = sqrt(mean_squared_error(y_test, predictions))
+	print("Train: " + str(len(y_train['WATERLVEL'].tolist())))
+	print("Val: " + str(len(y_val['WATERLVEL'].tolist())))
+	print("Test: " + str(len(y_test['WATERLVEL'].tolist())))
+	print("Prediction: " + str(len(predictions)))
+
+	rms = sqrt(mean_squared_error(y_val, y_test))
 	print("\n\nRMSE Accuracy score: " + str(rms))
 
-	mape = mean_absolute_percentage_error(y_test, predictions)
+	mape = mean_absolute_percentage_error(y_val, y_test)
 
 	print("\n\nMAPE Accuracy score: " + str(mape))
 
 	# SCATTER
 	fig, ax = plt.subplots()
 	ax.set_title(str(archi) + " Rainy " + str(button_)+", Parameters: cons: " +str(cons)+ " epsilon: " +str(eps)+" gamma: "+str(gam))
-	ax.plot(y_test, predictions, color = "red")
+	ax.plot(y_val, y_test, color = "red")
 	#ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'k--', lw=4, color = "blue")
 	ax.set_xlabel('Actual')
 	ax.set_ylabel('Predicted')
 	#plt.show()
-	figure_name = str(archi) + "-Rainy-"  + str(button_)+"-"+str(cons)+"-"+str(eps)+"-"+str(gam)+".png"
+	figure_name = "Images/" + str(archi) + "-Rainy-"  + str(button_)+"-"+str(cons)+"-"+str(eps)+"-"+str(gam)+".png"
 	fig.savefig(figure_name, format="png")
 	plt.close(fig)  
 
