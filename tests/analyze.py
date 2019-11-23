@@ -286,10 +286,10 @@ def predict(series, button_, cons, eps, p, gam, archi):
 		X = series[['WATERLVEL', 'DAY', 'TIME', 'MONTH', 'YEAR','t-12','t-24','t-72','t-168']]   #[12, 24, 72, 168]
 		y = series[['WATERLVEL']]		
 
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=101)
+	# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=101)
+	# lm.fit(X_train,y_train)
+	# lm = LinearRegression()
 
-	lm = LinearRegression()
-	lm.fit(X_train,y_train)
 
 	# for x in X_test['WATERLVEL']:
 	# 	predictions = lm.predict(X_test)
@@ -328,8 +328,15 @@ def predict(series, button_, cons, eps, p, gam, archi):
 
 	svc = svm.SVR()
 	clf = GridSearchCV(svc, parameters, cv=2)
-	fitted = clf.fit(X_train.astype('int'), y_train.astype('int'))
 
+
+
+	print("Training")
+
+	fitted = clf.fit(X_train.astype('float'), y_train.astype('float'))
+
+	filename = str(archi) + "-Rainy-"  + str(button_)+"-"+str(cons)+"-"+str(eps)+"-"+str(gam)+'.sav'
+	pickle.dump(fitted, open(filename, 'wb'))
 
 	print("\nBest parameters set found on development set:\n")
 	print(clf.best_params_)
@@ -342,6 +349,8 @@ def predict(series, button_, cons, eps, p, gam, archi):
 
 	#VALIDATE VIA RMSE
 
+
+
 	predictions = clf.predict(X_test)
 	#print(predictions)
 	print("Train: " + str(len(y_train['WATERLVEL'].tolist())))
@@ -349,17 +358,20 @@ def predict(series, button_, cons, eps, p, gam, archi):
 	print("Test: " + str(len(y_test['WATERLVEL'].tolist())))
 	print("Prediction: " + str(len(predictions)))
 
-	rms = sqrt(mean_squared_error(y_val, y_test))
+	y_val1 = pd.read_csv('raintest.csv')
+	y_val1 = y_val1['waterlevel'].tolist()
+
+	rms = sqrt(mean_squared_error(y_val1, predictions[:len(y_val1)]))
 	print("\n\nRMSE Accuracy score: " + str(rms))
 
-	mape = mean_absolute_percentage_error(y_val, y_test)
+	mape = mean_absolute_percentage_error(y_val1, predictions[:len(y_val1)])
 
 	print("\n\nMAPE Accuracy score: " + str(mape))
 
 	# SCATTER
 	fig, ax = plt.subplots()
 	ax.set_title(str(archi) + " Rainy " + str(button_)+", Parameters: cons: " +str(cons)+ " epsilon: " +str(eps)+" gamma: "+str(gam))
-	ax.plot(y_val, y_test, color = "red")
+	ax.plot(y_val, predictions[:len(y_val)], color = "red")
 	#ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'k--', lw=4, color = "blue")
 	ax.set_xlabel('Actual')
 	ax.set_ylabel('Predicted')
