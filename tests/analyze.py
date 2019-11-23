@@ -327,13 +327,13 @@ def predict(series, button_, cons, eps, p, gam, archi):
 	# print("======================================")
 
 	svc = svm.SVR()
-	clf = GridSearchCV(svc, parameters, cv=2)
+	clf = GridSearchCV(svc, parameters, cv=2, scoring="accuracy",n_jobs=32, iid=False, verbose=2)
 
 
 
 	print("Training")
 
-	fitted = clf.fit(X_train.astype('float'), y_train.astype('float'))
+	fitted = clf.fit(X_train, y_train)
 
 	filename = str(archi) + "-Rainy-"  + str(button_)+"-"+str(cons)+"-"+str(eps)+"-"+str(gam)+'.sav'
 	pickle.dump(fitted, open(filename, 'wb'))
