@@ -152,13 +152,13 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.epsEdit.setFont(font)
         self.epsEdit.setObjectName("epsEdit")
-        self.pEdit = QtWidgets.QLineEdit(self.paraBox)
-        self.pEdit.setGeometry(QtCore.QRect(30, 60, 113, 20))
+        #self.pEdit = QtWidgets.QLineEdit(self.paraBox)
+        #self.pEdit.setGeometry(QtCore.QRect(30, 60, 113, 20))
         font = QtGui.QFont()
         font.setFamily("Open Sans")
         font.setPointSize(9)
-        self.pEdit.setFont(font)
-        self.pEdit.setObjectName("pEdit")
+        #self.pEdit.setFont(font)
+        #self.pEdit.setObjectName("pEdit")
         self.gamEdit = QtWidgets.QLineEdit(self.paraBox)
         self.gamEdit.setGeometry(QtCore.QRect(170, 60, 113, 20))
         font = QtGui.QFont()
@@ -205,7 +205,7 @@ class Ui_MainWindow(object):
         self.trainresultTable = QtWidgets.QTableWidget(self.resultBox)
         self.trainresultTable.setGeometry(QtCore.QRect(120, 20, 741, 241))
         self.trainresultTable.setRowCount(48911)
-        self.trainresultTable.setColumnCount(10)
+        self.trainresultTable.setColumnCount(9)
         self.trainresultTable.setObjectName("trainresultTable")
         item = QtWidgets.QTableWidgetItem()
         self.trainresultTable.setHorizontalHeaderItem(0, item)
@@ -225,8 +225,7 @@ class Ui_MainWindow(object):
         self.trainresultTable.setHorizontalHeaderItem(7, item)
         item = QtWidgets.QTableWidgetItem()
         self.trainresultTable.setHorizontalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.trainresultTable.setHorizontalHeaderItem(9, item)
+
 
 
         self.functionTab.addTab(self.trainTab, "")
@@ -239,7 +238,7 @@ class Ui_MainWindow(object):
         self.valDataTable = QtWidgets.QTableWidget(self.validationBox)
         self.valDataTable.setGeometry(QtCore.QRect(20, 20, 421, 421))
         self.valDataTable.setRowCount(48911)
-        self.valDataTable.setColumnCount(10)
+        self.valDataTable.setColumnCount(9)
         self.valDataTable.setObjectName("valDataTable")
         item = QtWidgets.QTableWidgetItem()
         self.valDataTable.setHorizontalHeaderItem(0, item)
@@ -259,7 +258,8 @@ class Ui_MainWindow(object):
         self.valDataTable.setHorizontalHeaderItem(7, item)
         item = QtWidgets.QTableWidgetItem()
         self.valDataTable.setHorizontalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
+
+
         self.valDataTable.setHorizontalHeaderItem(9, item)
         self.valresultBox = QtWidgets.QGroupBox(self.validateTab)
         self.valresultBox.setGeometry(QtCore.QRect(500, 80, 481, 411))
@@ -370,7 +370,7 @@ class Ui_MainWindow(object):
         self.foreDataTable = QtWidgets.QTableWidget(self.forecastBox)
         self.foreDataTable.setGeometry(QtCore.QRect(20, 30, 421, 431))
         self.foreDataTable.setRowCount(48911)
-        self.foreDataTable.setColumnCount(10)
+        self.foreDataTable.setColumnCount(9)
         self.foreDataTable.setObjectName("foreDataTable")
         item = QtWidgets.QTableWidgetItem()
 
@@ -391,8 +391,6 @@ class Ui_MainWindow(object):
         self.foreDataTable.setHorizontalHeaderItem(7, item)
         item = QtWidgets.QTableWidgetItem()
         self.foreDataTable.setHorizontalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.foreDataTable.setHorizontalHeaderItem(9, item)
 
 
         self.foreresultBox = QtWidgets.QGroupBox(self.forecastTab)
@@ -481,7 +479,7 @@ class Ui_MainWindow(object):
         self.paraBox.setTitle(_translate("MainWindow", "Input Parameters"))
         self.consEdit.setPlaceholderText(_translate("MainWindow", "C"))
         self.epsEdit.setPlaceholderText(_translate("MainWindow", "ε"))
-        self.pEdit.setPlaceholderText(_translate("MainWindow", "P"))
+        #self.pEdit.setPlaceholderText(_translate("MainWindow", "P"))
         self.gamEdit.setPlaceholderText(_translate("MainWindow", " γ"))
         self.kernelBox.setTitle(_translate("MainWindow", "Select Kernel"))
         self.btnRbf.setText(_translate("MainWindow", "RBF"))
@@ -493,45 +491,48 @@ class Ui_MainWindow(object):
         item = self.trainresultTable.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "WATERLEVEL"))
         item = self.trainresultTable.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "RF_DIGKILAAN"))
-        item = self.trainresultTable.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "RF_ROGONGON"))
-        item = self.trainresultTable.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Day"))
-        item = self.trainresultTable.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Time"))
-        item = self.trainresultTable.horizontalHeaderItem(5)
+        item = self.trainresultTable.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Day"))
+        item = self.trainresultTable.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Month"))
-        item = self.trainresultTable.horizontalHeaderItem(6)
+        item = self.trainresultTable.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Year"))
+        item = self.trainresultTable.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "t-12"))
+        item = self.trainresultTable.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "t-24"))
         item = self.trainresultTable.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "i - 1"))
+        item.setText(_translate("MainWindow", "t-72"))
         item = self.trainresultTable.horizontalHeaderItem(8)
-        item.setText(_translate("MainWindow", "i - 2"))
-        item = self.trainresultTable.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "i - 3"))
+        item.setText(_translate("MainWindow", "t-168"))
+
+
+
         self.functionTab.setTabText(self.functionTab.indexOf(self.trainTab), _translate("MainWindow", "Train"))
         self.validationBox.setTitle(_translate("MainWindow", "Validation Data"))
         item = self.valDataTable.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "WATERLEVEL"))
-        item = self.valDataTable.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "RF_DIGKILAAN"))
-        item = self.valDataTable.horizontalHeaderItem(2)
+        item = self.valDataTable.horizontalHeaderItem(1)        
+        item.setText(_translate("MainWindow", "Time"))        
+        item = self.valDataTable.horizontalHeaderItem(2)        
         item.setText(_translate("MainWindow", "Day"))
         item = self.valDataTable.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Time"))
-        item = self.valDataTable.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Month"))
-        item = self.valDataTable.horizontalHeaderItem(5)
+        item = self.valDataTable.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Year"))
+        item = self.valDataTable.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "t-12"))
         item = self.valDataTable.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "RF_ROGONGON"))
+        item.setText(_translate("MainWindow", "t-24"))
         item = self.valDataTable.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "i - 1"))
+        item.setText(_translate("MainWindow", "t-72"))
         item = self.valDataTable.horizontalHeaderItem(8)
-        item.setText(_translate("MainWindow", "i - 2"))
-        item = self.valDataTable.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "i - 3"))
+        item.setText(_translate("MainWindow", "t-168"))
+
+
+
+
         self.valresultBox.setTitle(_translate("MainWindow", "Results"))
 
         item = self.valResulTable.horizontalHeaderItem(0)
@@ -556,30 +557,32 @@ class Ui_MainWindow(object):
 
         item = self.foreDataTable.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "WATERLEVEL"))
-        item = self.foreDataTable.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "RF_DIGKILAAN"))
-        item = self.foreDataTable.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "RF_ROGONGON"))
-        item = self.foreDataTable.horizontalHeaderItem(3)
+        item = self.foreDataTable.horizontalHeaderItem(1)        
+        item.setText(_translate("MainWindow", "Time"))        
+        item = self.foreDataTable.horizontalHeaderItem(2)        
         item.setText(_translate("MainWindow", "Day"))
-        item = self.foreDataTable.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Time"))
-        item = self.foreDataTable.horizontalHeaderItem(5)
+        item = self.foreDataTable.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Month"))
-        item = self.foreDataTable.horizontalHeaderItem(6)
+        item = self.foreDataTable.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Year"))
+        item = self.foreDataTable.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "t-12"))
+        item = self.foreDataTable.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "t-24"))
         item = self.foreDataTable.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "i - 1"))
+        item.setText(_translate("MainWindow", "t-72"))
         item = self.foreDataTable.horizontalHeaderItem(8)
-        item.setText(_translate("MainWindow", "i - 2"))
-        item = self.foreDataTable.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "i - 3"))
+        item.setText(_translate("MainWindow", "t-168"))
+
+
 
         self.foreresultBox.setTitle(_translate("MainWindow", "Results"))
         item = self.foreResultTable.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "DATETIME"))
-        item = self.foreResultTable.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "WATERLEVEL (Forecasted)"))
+        item = self.foreResultTable.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "DATETIME"))
+
+
         self.forecastBtn.setText(_translate("MainWindow", "Forecast"))
 
         self.functionTab.setTabText(self.functionTab.indexOf(self.forecastTab), _translate("MainWindow", "Forecast"))
@@ -616,12 +619,12 @@ class Ui_MainWindow(object):
         print(file)
         print(self.consEdit.text())
         print(self.epsEdit.text())
-        print(self.pEdit.text())
+        #print(self.pEdit.text())
         print(self.gamEdit.text())
 
         cons = float(self.consEdit.text())
         eps = float(self.epsEdit.text())
-        p = float(self.pEdit.text())
+        p = 0.1
         gam = float(self.gamEdit.text())
 
         button_ = ""
@@ -691,7 +694,7 @@ class Ui_MainWindow(object):
         file = "D:/Aug/waterlevel_forecastingsystem/Trained/merged_imputation_f.csv"
         cons = float(self.consEdit.text())
         eps = float(self.epsEdit.text())
-        p = float(self.pEdit.text())
+        p = 0.1
         gam = float(self.gamEdit.text())
 
         button_ = ""
@@ -703,6 +706,7 @@ class Ui_MainWindow(object):
                 button_ = button.text()
                 if button_ == "Polynomial":
                     button_ = "Poly"
+
         print(button_)
 
         df = pd.read_csv(file)
@@ -750,7 +754,7 @@ class Ui_MainWindow(object):
 
         cons = float(self.consEdit.text())
         eps = float(self.epsEdit.text())
-        p = float(self.pEdit.text())
+        p = 0.1
         gam = float(self.gamEdit.text())
 
         button_ = ""
@@ -771,7 +775,7 @@ class Ui_MainWindow(object):
         dates = get_date_time_after()
 
         val.drop(['RMSE','MAPE','WATERLVEL'], axis=1, inplace=True)
-        val['Predicted'] = df['Predicted'].iloc[:len(dates)]
+        val['Predicted'] = val['Predicted'].iloc[:len(dates)]
         val['DATETIME'] = dates
         val[['DATETIME','Predicted']]
 
@@ -779,6 +783,9 @@ class Ui_MainWindow(object):
         for i in range(0,val.shape[1]):
             for j in range(0, val.shape[0]):
                  self.foreResultTable.setItem(j,i, QtWidgets.QTableWidgetItem(str(val.iloc[j][i])))
+
+
+
 
 import qtresources
 

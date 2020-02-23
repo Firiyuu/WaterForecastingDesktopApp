@@ -14,7 +14,7 @@ from math import sqrt
 
 
 from season import get_rainy, get_dry
-from analyze import analyze, train, predict, train_ui
+from analyze import  train, predict, train_ui
 from dateandtime import get_date_time_after
 #NORMALIZATION
 
@@ -64,12 +64,12 @@ def run_nt(file_, button_, cons, eps, p, gam):
 
 
 	#12 to 5
-	series_rainy = get_rainy(series)
-	rainy = analyze(series_rainy)
+	#series_rainy = get_dry(series)
+	#rainy = analyze(series_rainy)
 	#rainy = represent(rainy)
-	df = train_ui(rainy,  button_, cons, eps, p, gam)
+	#df = train_ui(rainy,  button_, cons, eps, p, gam)
 
-	return df
+	return series
 
 
 	# predictions = predict(rainy, button_, cons, eps, p, gam)
