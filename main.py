@@ -16,6 +16,8 @@ import shutil
 import pandas as pd
 from dateandtime import get_date_time_after
 import matplotlib.pyplot as plt
+import datetime
+import matplotlib
 
 
 class Ui_MainWindow(object):
@@ -731,21 +733,28 @@ class Ui_MainWindow(object):
 
 
     def visualize(self):
-        file = "D:/Aug/waterlevel_forecastingsystem/visualize.csv"
+        file = "visualize.csv"
         df = pd.read_csv(file)
-        rmse = df['RMSE'].tolist()
-        mape = df['MAPE'].tolist()
+        # rmse = df['RMSE'].tolist()
+        # mape = df['MAPE'].tolist()
         actual = df['WATERLVEL'].tolist()
         predicted = df['Predicted'].tolist()
 
 
-        plt.plot(rmse, rmse)
-        plt.plot(rmse, mape)
-        plt.plot(rmse, actual)
-        plt.plot(rmse, predicted)
-        plt.legend(['RMSE', 'MAPE', 'Actual', 'Predicted'], loc='upper left')
-        plt.xlabel('Waterlevel Graph')
+        denorm = pd.read_csv('generated.csv')
+        denorm = denorm['DENORM'].tolist()
+
+        # SCATTER
+        time_format = '%m:%d:%Y %H:%M'
+        time = [datetime.datetime.strptime(i, time_format) for i in denorm]
+        dates = matplotlib.dates.date2num(time)
+
+        fig, ax = plt.subplots()
+        ax.set_title("Forecasted Waterlevel")
+        ax.plot_date(dates[:144], actual[:144],'b-', label="Actual", color="red")
+        ax.plot_date(dates[:144], predicted[:144], 'r--', label="Predicted", color="blue")
         plt.show()
+
 
 
 
